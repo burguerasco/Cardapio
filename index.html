@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4eee8" />
+    <meta
+      name="description"
+      content="Cardápio digital da Burguerasco — hambúrgueres preparados na brasa."
+    />
+    <title>Burguerasco | Cardápio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/style.css" />
+    <script src="src/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topo">
+      <div class="topo__conteudo">
+        <div class="logo" id="logoMarca" aria-label="Logo da Burguerasco">
+          <span>SUA</span>
+          <strong>LOGO</strong>
+        </div>
+
+        <div class="titulo-marca">
+          <span>BURGUERASCO</span>
+          <h1>CARDÁPIO</h1>
+          <div class="titulo-marca__detalhe" aria-hidden="true">
+            <i></i><b>♨</b><i></i>
+          </div>
+        </div>
+
+        <button class="botao-carrinho botao-carrinho--topo" id="abrirCarrinho" type="button">
+          <span>Pedido</span>
+          <b id="quantidadeTopo">0</b>
+        </button>
+      </div>
+    </header>
+
+    <div class="endereco-loja">
+      <span>⌖</span> Rua Isabel Fernandes, s/n, Guarujá, Macarani - BA
+    </div>
+
+    <main class="layout">
+      <section class="cardapio" aria-labelledby="tituloProdutos">
+        <div class="categorias" id="categorias" aria-label="Categorias do cardápio"></div>
+
+        <div class="secao-titulo">
+          <div>
+            <span>ESCOLHA SEU PEDIDO</span>
+            <h2 id="tituloProdutos">Burguers</h2>
+          </div>
+          <p id="subtituloProdutos">Preparados na brasa</p>
+        </div>
+
+        <div class="produtos" id="listaProdutos"></div>
+      </section>
+
+      <aside class="pedido pedido--desktop" id="painelDesktop" aria-label="Resumo do pedido"></aside>
+    </main>
+
+    <button class="barra-pedido" id="barraPedido" type="button" hidden>
+      <span>Ver pedido <b id="quantidadeBarra">0</b></span>
+      <strong id="totalBarra">R$ 0,00</strong>
+    </button>
+
+    <div class="modal" id="modalCarrinho" hidden>
+      <button class="modal__fundo" id="fecharPeloFundo" aria-label="Fechar pedido" type="button"></button>
+      <section class="modal__conteudo" role="dialog" aria-modal="true" aria-label="Seu pedido">
+        <button class="modal__fechar" id="fecharCarrinho" type="button" aria-label="Fechar">×</button>
+        <div class="pedido pedido--mobile" id="painelMobile"></div>
+      </section>
+    </div>
+
+    <template id="templatePainel">
+      <div class="pedido__cabecalho">
+        <div>
+          <span>SEU PEDIDO</span>
+          <h2 data-resumo-titulo>Carrinho vazio</h2>
+        </div>
+        <span class="pedido__icone">▱</span>
+      </div>
+
+      <div class="pedido__itens" data-itens></div>
+
+      <div class="pedido__vazio" data-vazio>
+        <span>♨</span>
+        <p>Adicione um item<br />para começar.</p>
+      </div>
+
+      <div class="pedido__total">
+        <span>Subtotal</span>
+        <strong data-subtotal>R$ 0,00</strong>
+      </div>
+      <p class="pedido__taxa">A taxa de entrega será confirmada pelo WhatsApp.</p>
+
+      <div class="grupo-botoes" data-tipo-entrega>
+        <button class="ativo" type="button" data-valor="entrega">Entrega</button>
+        <button type="button" data-valor="retirada">Retirada</button>
+      </div>
+
+      <div class="formulario">
+        <label>
+          Nome
+          <input type="text" data-campo="nome" placeholder="Como podemos chamar você?" autocomplete="name" />
+        </label>
+        <label>
+          WhatsApp
+          <input type="tel" data-campo="telefone" placeholder="(77) 99999-9999" autocomplete="tel" />
+        </label>
+        <label data-endereco-wrap>
+          Endereço de entrega
+          <input type="text" data-campo="endereco" placeholder="Rua, número e bairro" autocomplete="street-address" />
+        </label>
+
+        <fieldset>
+          <legend>Forma de pagamento</legend>
+          <div class="pagamentos" data-pagamentos>
+            <button type="button" data-valor="pix">Pix</button>
+            <button type="button" data-valor="cartao">Cartão</button>
+            <button type="button" data-valor="dinheiro">Dinheiro</button>
+          </div>
+        </fieldset>
+
+        <label data-troco-wrap hidden>
+          Troco para
+          <input type="text" inputmode="decimal" data-campo="troco" placeholder="Ex.: R$ 50,00" />
+        </label>
+
+        <label>
+          Observações gerais
+          <textarea data-campo="observacao" rows="3" placeholder="Ponto de referência ou outro recado"></textarea>
+        </label>
+      </div>
+
+      <p class="mensagem-validacao" data-validacao aria-live="polite"></p>
+      <button class="finalizar" data-finalizar type="button">Enviar pedido no WhatsApp</button>
+    </template>
+  </body>
+</html>
