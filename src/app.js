@@ -65,6 +65,8 @@ const estado = {
   campos: { nome: "", telefone: "", endereco: "", troco: "", observacao: "" },
 };
 
+let rolagemPagina = 0;
+
 const moeda = (valor) => valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 const produtoPorId = (id) => PRODUTOS.find((produto) => produto.id === Number(id));
 
@@ -125,7 +127,7 @@ function renderizarProdutos() {
   const produtos = PRODUTOS.filter((produto) => produto.categoria === estado.categoria);
   const container = document.querySelector("#listaProdutos");
 
-  container.innerHTML = produtos.map((produto, indice) => {
+  const cards = produtos.map((produto, indice) => {
     const quantidade = estado.carrinho[produto.id] || 0;
     const estiloImagem = produto.imagem ? `style="background-image:url('${produto.imagem}')"` : "";
     return `
@@ -148,6 +150,18 @@ function renderizarProdutos() {
       </article>
     `;
   }).join("");
+
+  const avisoNovidades = estado.categoria === "burguers" ? `
+    <div class="aviso-novidades">
+      <span aria-hidden="true">♨</span>
+      <div>
+        <small>NOVIDADES</small>
+        <p>Em breve teremos mais novidades.</p>
+      </div>
+    </div>
+  ` : "";
+
+  container.innerHTML = cards + avisoNovidades;
 
   ligarControles(container);
 }
@@ -254,8 +268,11 @@ function sincronizarCampo(nome, valor, origem) {
 }
 
 function renderizarPaineis() {
+  const painelMobile = document.querySelector("#painelMobile");
+  const rolagemCarrinho = painelMobile.scrollTop;
   montarPainel(document.querySelector("#painelDesktop"));
-  montarPainel(document.querySelector("#painelMobile"));
+  montarPainel(painelMobile);
+  requestAnimationFrame(() => { painelMobile.scrollTop = rolagemCarrinho; });
 }
 
 function validarPedido() {
@@ -321,13 +338,22 @@ function renderizarTudo() {
 }
 
 function abrirCarrinho() {
-  document.querySelector("#modalCarrinho").hidden = false;
-  document.body.style.overflow = "hidden";
+  const modal = document.querySelector("#modalCarrinho");
+  if (!modal.hidden) return;
+  rolagemPagina = window.scrollY;
+  document.body.style.top = `-${rolagemPagina}px`;
+  document.body.classList.add("carrinho-aberto");
+  modal.hidden = false;
+  document.querySelector("#fecharCarrinho").focus({ preventScroll: true });
 }
 
 function fecharCarrinho() {
-  document.querySelector("#modalCarrinho").hidden = true;
-  document.body.style.overflow = "";
+  const modal = document.querySelector("#modalCarrinho");
+  if (modal.hidden) return;
+  modal.hidden = true;
+  document.body.classList.remove("carrinho-aberto");
+  document.body.style.top = "";
+  window.scrollTo(0, rolagemPagina);
 }
 
 function escaparHtml(texto) {
