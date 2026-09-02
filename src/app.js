@@ -2,6 +2,7 @@
 const CONFIG = {
   whatsapp: "5577988047525",
   endereco: "Rua Isabel Fernandes, s/n, Guarujá, Macarani - BA",
+  taxaEntrega: 3,
   // Para trocar a logo depois, substitua o arquivo src/images/logo.png.
   logo: "src/images/logo.png",
 };
@@ -41,12 +42,12 @@ const PRODUTOS = [
     preco: 36,
     imagem: "src/images/burguerasco.webp",
   },
-  { id: 5, categoria: "latas", nome: "Coca-Cola lata", descricao: "350 ml • bem gelada", preco: 6, imagem: "" },
-  { id: 6, categoria: "latas", nome: "Coca-Cola Zero lata", descricao: "350 ml • sem açúcar", preco: 6, imagem: "" },
-  { id: 7, categoria: "latas", nome: "Guaraná Antarctica lata", descricao: "350 ml • bem gelado", preco: 6, imagem: "" },
-  { id: 8, categoria: "litro", nome: "Coca-Cola 1 litro", descricao: "Garrafa de 1 litro", preco: 10, imagem: "" },
-  { id: 9, categoria: "litro", nome: "Coca-Cola Zero 1 litro", descricao: "Garrafa de 1 litro • sem açúcar", preco: 10, imagem: "" },
-  { id: 10, categoria: "litro", nome: "Guaraná Antarctica 1 litro", descricao: "Garrafa de 1 litro", preco: 10, imagem: "" },
+  { id: 5, categoria: "latas", nome: "Coca-Cola lata", descricao: "350 ml • bem gelada", preco: 6, imagem: "src/images/coca-cola-lata.webp" },
+  { id: 6, categoria: "latas", nome: "Coca-Cola Zero lata", descricao: "350 ml • sem açúcar", preco: 6, imagem: "src/images/coca-cola-zero-lata.webp" },
+  { id: 7, categoria: "latas", nome: "Guaraná Antarctica lata", descricao: "350 ml • bem gelado", preco: 6, imagem: "src/images/guarana-lata.webp" },
+  { id: 8, categoria: "litro", nome: "Coca-Cola 1 litro", descricao: "Garrafa de 1 litro", preco: 10, imagem: "src/images/coca-cola-1l.webp" },
+  { id: 9, categoria: "litro", nome: "Coca-Cola Zero 1 litro", descricao: "Garrafa de 1 litro • sem açúcar", preco: 10, imagem: "src/images/coca-cola-zero-1l.webp" },
+  { id: 10, categoria: "litro", nome: "Guaraná Antarctica 1 litro", descricao: "Garrafa de 1 litro", preco: 10, imagem: "src/images/guarana-1l.webp" },
 ];
 
 const CATEGORIAS = [
@@ -79,6 +80,14 @@ function quantidadeTotal() {
 
 function subtotal() {
   return itensDoCarrinho().reduce((total, item) => total + item.preco * item.quantidade, 0);
+}
+
+function taxaEntrega() {
+  return estado.entrega === "entrega" && quantidadeTotal() > 0 ? CONFIG.taxaEntrega : 0;
+}
+
+function totalPedido() {
+  return subtotal() + taxaEntrega();
 }
 
 function alterarQuantidade(id, diferenca) {
@@ -121,7 +130,7 @@ function renderizarProdutos() {
     const estiloImagem = produto.imagem ? `style="background-image:url('${produto.imagem}')"` : "";
     return `
       <article class="produto">
-        <div class="produto__imagem ${produto.imagem ? "com-imagem" : ""}" ${estiloImagem}>
+        <div class="produto__imagem ${produto.imagem ? "com-imagem" : ""} ${produto.categoria !== "burguers" ? "produto__imagem--bebida" : ""}" ${estiloImagem}>
           <div class="produto__placeholder"><span>▧</span><small>ESPAÇO PARA FOTO</small></div>
         </div>
         <div class="produto__conteudo">
@@ -181,6 +190,11 @@ function montarPainel(destino) {
     : "Carrinho vazio";
   destino.querySelector("[data-vazio]").hidden = itens.length > 0;
   destino.querySelector("[data-subtotal]").textContent = moeda(subtotal());
+  destino.querySelector("[data-taxa-entrega]").textContent = moeda(taxaEntrega());
+  destino.querySelector("[data-total]").textContent = moeda(totalPedido());
+  destino.querySelector("[data-aviso-taxa]").textContent = estado.entrega === "entrega"
+    ? `Taxa fixa de entrega: ${moeda(CONFIG.taxaEntrega)}.`
+    : "Retirada no local: sem taxa de entrega.";
 
   const lista = destino.querySelector("[data-itens]");
   lista.innerHTML = itens.map((item) => `
@@ -277,7 +291,8 @@ function enviarPedido(destino) {
     ...linhasProdutos,
     "",
     `*Subtotal:* ${moeda(subtotal())}`,
-    "_Taxa de entrega confirmada pelo WhatsApp._",
+    `*Taxa de entrega:* ${moeda(taxaEntrega())}`,
+    `*Total:* ${moeda(totalPedido())}`,
     "",
     `*Cliente:* ${estado.campos.nome.trim()}`,
     `*Telefone:* ${estado.campos.telefone.trim()}`,
@@ -294,7 +309,7 @@ function atualizarIndicadores() {
   const quantidade = quantidadeTotal();
   document.querySelector("#quantidadeTopo").textContent = quantidade;
   document.querySelector("#quantidadeBarra").textContent = quantidade;
-  document.querySelector("#totalBarra").textContent = moeda(subtotal());
+  document.querySelector("#totalBarra").textContent = moeda(totalPedido());
   document.querySelector("#barraPedido").hidden = quantidade === 0;
 }
 

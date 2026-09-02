@@ -92,11 +92,21 @@
         <p>Adicione um item<br />para começar.</p>
       </div>
 
-      <div class="pedido__total">
-        <span>Subtotal</span>
-        <strong data-subtotal>R$ 0,00</strong>
+      <div class="pedido__valores">
+        <div>
+          <span>Subtotal</span>
+          <strong data-subtotal>R$ 0,00</strong>
+        </div>
+        <div>
+          <span>Taxa de entrega</span>
+          <strong data-taxa-entrega>R$ 3,00</strong>
+        </div>
       </div>
-      <p class="pedido__taxa">A taxa de entrega será confirmada pelo WhatsApp.</p>
+      <div class="pedido__total">
+        <span>Total</span>
+        <strong data-total>R$ 0,00</strong>
+      </div>
+      <p class="pedido__taxa" data-aviso-taxa>Taxa fixa de entrega: R$ 3,00.</p>
 
       <div class="grupo-botoes" data-tipo-entrega>
         <button class="ativo" type="button" data-valor="entrega">Entrega</button>

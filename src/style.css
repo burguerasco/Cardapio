@@ -195,6 +195,12 @@ button { cursor: pointer; }
   background-position: center;
 }
 .produto__imagem.com-imagem .produto__placeholder { display: none; }
+.produto__imagem--bebida {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  padding: 14px;
+}
 .produto__placeholder { text-align: center; }
 .produto__placeholder span { display: block; font-size: 2rem; }
 .produto__placeholder small {
@@ -336,9 +342,23 @@ button { cursor: pointer; }
 .item-carrinho .contador { margin-top: 10px; }
 .item-carrinho .contador button { width: 29px; height: 29px; }
 
-.pedido__total {
+.pedido__valores {
   margin-top: 16px;
   padding-top: 14px;
+  display: grid;
+  gap: 7px;
+  border-top: 1px solid var(--linha);
+}
+.pedido__valores > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  font-size: 0.82rem;
+}
+.pedido__valores strong { color: var(--grafite-forte); }
+.pedido__total {
+  margin-top: 12px;
+  padding-top: 12px;
   display: flex;
   justify-content: space-between;
   align-items: end;
