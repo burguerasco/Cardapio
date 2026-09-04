@@ -324,7 +324,8 @@ function enviarPedido(destino) {
 
 function atualizarIndicadores() {
   const quantidade = quantidadeTotal();
-  document.querySelector("#quantidadeTopo").textContent = quantidade;
+  const quantidadeTopo = document.querySelector("#quantidadeTopo");
+  if (quantidadeTopo) quantidadeTopo.textContent = quantidade;
   document.querySelector("#quantidadeBarra").textContent = quantidade;
   document.querySelector("#totalBarra").textContent = moeda(totalPedido());
   document.querySelector("#barraPedido").hidden = quantidade === 0;
@@ -367,11 +368,14 @@ function escaparHtml(texto) {
 function iniciar() {
   if (CONFIG.logo) {
     const logo = document.querySelector("#logoMarca");
-    logo.style.backgroundImage = `url('${CONFIG.logo}')`;
-    logo.classList.add("com-imagem");
+    if (logo) {
+      logo.style.backgroundImage = `url('${CONFIG.logo}')`;
+      logo.classList.add("com-imagem");
+    }
   }
 
-  document.querySelector("#abrirCarrinho").addEventListener("click", abrirCarrinho);
+  const botaoTopo = document.querySelector("#abrirCarrinho");
+  if (botaoTopo) botaoTopo.addEventListener("click", abrirCarrinho);
   document.querySelector("#barraPedido").addEventListener("click", abrirCarrinho);
   document.querySelector("#fecharCarrinho").addEventListener("click", fecharCarrinho);
   document.querySelector("#fecharPeloFundo").addEventListener("click", fecharCarrinho);

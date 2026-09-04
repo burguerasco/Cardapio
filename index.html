@@ -16,29 +16,16 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="src/style.css" />
+    <link rel="stylesheet" href="src/hero-video.css" />
     <script src="src/app.js" defer></script>
   </head>
   <body>
-    <header class="topo">
-      <div class="topo__conteudo">
-        <div class="logo" id="logoMarca" aria-label="Logo da Burguerasco">
-          <span>SUA</span>
-          <strong>LOGO</strong>
-        </div>
-
-        <div class="titulo-marca">
-          <span>BURGUERASCO</span>
-          <h1>CARDÁPIO</h1>
-          <div class="titulo-marca__detalhe" aria-hidden="true">
-            <i></i><b>♨</b><i></i>
-          </div>
-        </div>
-
-        <button class="botao-carrinho botao-carrinho--topo" id="abrirCarrinho" type="button">
-          <span>Pedido</span>
-          <b id="quantidadeTopo">0</b>
-        </button>
-      </div>
+    <header class="topo topo--video">
+      <video class="topo__video" autoplay muted loop playsinline preload="metadata">
+        <source src="hero-video.mp4" type="video/mp4" />
+      </video>
+      <div class="topo__overlay"></div>
+      <img class="topo__logo" src="logo-burguerasco.png" alt="Burguerasco" />
     </header>
 
     <div class="endereco-loja">
