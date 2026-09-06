@@ -69,13 +69,13 @@
           <span>SEU PEDIDO</span>
           <h2 data-resumo-titulo>Carrinho vazio</h2>
         </div>
-        <span class="pedido__icone">▱</span>
       </div>
 
+      <p class="pedido__aviso" data-aviso-carrinho role="status" hidden></p>
       <div class="pedido__itens" data-itens></div>
+      <button class="limpar-carrinho" data-limpar-carrinho type="button" hidden>Limpar carrinho</button>
 
       <div class="pedido__vazio" data-vazio>
-        <span>♨</span>
         <p>Adicione um item<br />para começar.</p>
       </div>
 
@@ -123,6 +123,22 @@
           </div>
         </fieldset>
 
+        <p class="pedido__aviso" data-aviso-cartao role="status" hidden>
+          Aceitamos pagamento por cartão <strong>somente por aproximação.</strong>
+        </p>
+
+        <div class="pix" data-pix hidden>
+          <label>
+            Chave Pix
+            <input type="text" data-chave-pix readonly aria-label="Chave Pix" inputmode="none" spellcheck="false" />
+          </label>
+          <button class="pix__copiar" type="button" data-copiar-pix>Copiar chave Pix</button>
+          <div class="pix__retorno" data-pix-retorno role="status" aria-live="polite" hidden>
+            <strong data-pix-status></strong>
+            <p>Não esqueça de enviar o comprovante de pagamento pelo WhatsApp.</p>
+          </div>
+        </div>
+
         <label data-troco-wrap hidden>
           Troco para
           <input type="text" inputmode="decimal" data-campo="troco" placeholder="Ex.: R$ 50,00" />
@@ -135,7 +151,10 @@
       </div>
 
       <p class="mensagem-validacao" data-validacao aria-live="polite"></p>
-      <button class="finalizar" data-finalizar type="button">Enviar pedido no WhatsApp</button>
+      <button class="finalizar" data-finalizar type="button">
+        <span aria-hidden="true">🚀</span>
+        <span>Enviar pedido no WhatsApp</span>
+      </button>
     </template>
   </body>
 </html>
