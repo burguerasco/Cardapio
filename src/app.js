@@ -4,6 +4,17 @@ const CONFIG = {
   chavePix: "77988047525",
   endereco: "Rua Isabel Fernandes, s/n, Guarujá, Macarani - BA",
   taxaEntrega: 3,
+  // ===== DIAS E HORÁRIOS: ALTERE SOMENTE ESTE BLOCO =====
+  // 0 = domingo, 1 = segunda, 2 = terça, 3 = quarta,
+  // 4 = quinta, 5 = sexta, 6 = sábado.
+  // Use horários entre aspas, no formato "HH:MM" (ex.: "19:30").
+  // O texto do aviso acompanha estas configurações automaticamente.
+  funcionamento: {
+    fusoHorario: "America/Bahia",
+    dias: [1, 2, 3, 4, 5, 6], // Segunda a sábado; domingo fechado.
+    abertura: "19:00",
+    fechamento: "23:00", // Pode ser após a meia-noite, como "01:00".
+  },
   // Para trocar a logo depois, substitua o arquivo src/images/logo.png.
   logo: "src/images/logo.png",
 };
@@ -76,9 +87,87 @@ const estado = {
 let rolagemPagina = 0;
 let tentativaCopiaPix = 0;
 let categoriaRenderizada = null;
+let temporizadorFuncionamento = null;
 
 const moeda = (valor) => valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 const produtoPorId = (id) => PRODUTOS.find((produto) => produto.id === Number(id));
+
+function horarioEmMinutos(horario) {
+  const partes = /^([01]\d|2[0-3]):([0-5]\d)$/.exec(horario);
+  return partes ? Number(partes[1]) * 60 + Number(partes[2]) : null;
+}
+
+function diasDeFuncionamento() {
+  return [...new Set(CONFIG.funcionamento.dias)]
+    .filter((dia) => Number.isInteger(dia) && dia >= 0 && dia <= 6)
+    .sort((a, b) => a - b);
+}
+
+function lojaEstaAberta(agora = new Date()) {
+  const abertura = horarioEmMinutos(CONFIG.funcionamento.abertura);
+  const fechamento = horarioEmMinutos(CONFIG.funcionamento.fechamento);
+  if (abertura === null || fechamento === null || abertura === fechamento) return false;
+
+  const partes = new Intl.DateTimeFormat("en-US", {
+    timeZone: CONFIG.funcionamento.fusoHorario,
+    weekday: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(agora);
+  const dia = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    .indexOf(partes.find((parte) => parte.type === "weekday").value);
+  const minutos = Number(partes.find((parte) => parte.type === "hour").value) * 60
+    + Number(partes.find((parte) => parte.type === "minute").value);
+  const dias = diasDeFuncionamento();
+
+  if (abertura < fechamento) {
+    return dias.includes(dia) && minutos >= abertura && minutos < fechamento;
+  }
+
+  // Quando termina após a meia-noite, a madrugada pertence ao dia de abertura.
+  return (dias.includes(dia) && minutos >= abertura)
+    || (dias.includes((dia + 6) % 7) && minutos < fechamento);
+}
+
+function textoHorarioFuncionamento() {
+  const dias = diasDeFuncionamento();
+  const abertura = horarioEmMinutos(CONFIG.funcionamento.abertura);
+  const fechamento = horarioEmMinutos(CONFIG.funcionamento.fechamento);
+  if (!dias.length || abertura === null || fechamento === null || abertura === fechamento) {
+    return "Consulte nossos horários de atendimento pelo WhatsApp.";
+  }
+
+  const nomesDias = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
+  const diasRecorrentes = ["aos domingos", "às segundas", "às terças", "às quartas", "às quintas", "às sextas", "aos sábados"];
+  let textoDias;
+  if (dias.length === 7) {
+    textoDias = "todos os dias";
+  } else if (dias.length > 1 && dias.every((dia, indice) => dia === dias[0] + indice)) {
+    textoDias = `de ${nomesDias[dias[0]]} a ${nomesDias[dias[dias.length - 1]]}`;
+  } else {
+    const nomes = dias.map((dia) => diasRecorrentes[dia]);
+    textoDias = nomes.length === 1 ? nomes[0] : `${nomes.slice(0, -1).join(", ")} e ${nomes[nomes.length - 1]}`;
+  }
+
+  const formatarHora = (minutos) => `${Math.floor(minutos / 60)}h${minutos % 60 ? String(minutos % 60).padStart(2, "0") : ""}`;
+  const fimNoDiaSeguinte = fechamento < abertura ? " do dia seguinte" : "";
+  return `Funcionamos ${textoDias}, das ${formatarHora(abertura)} às ${formatarHora(fechamento)}${fimNoDiaSeguinte}.`;
+}
+
+function atualizarFuncionamento() {
+  window.clearTimeout(temporizadorFuncionamento);
+  const aviso = document.querySelector("#avisoFuncionamento");
+  if (!aviso) return;
+
+  const descricao = aviso.querySelector("[data-horario-funcionamento]");
+  const texto = textoHorarioFuncionamento();
+  if (descricao && descricao.textContent !== texto) descricao.textContent = texto;
+  // O aviso informa o horário; o cardápio continua aceitando encomendas.
+  aviso.hidden = lojaEstaAberta();
+  // Reconfere na virada de cada minuto, sem recarregar ou alterar o carrinho.
+  temporizadorFuncionamento = window.setTimeout(atualizarFuncionamento, 60000 - (Date.now() % 60000));
+}
 
 function animarElemento(elemento, quadros, opcoes = {}) {
   if (!elemento || typeof elemento.animate !== "function") return;
@@ -642,6 +731,12 @@ function iniciar() {
   });
 
   renderizarTudo();
+  atualizarFuncionamento();
+  window.addEventListener("focus", atualizarFuncionamento);
+  window.addEventListener("pageshow", atualizarFuncionamento);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) atualizarFuncionamento();
+  });
 }
 
 document.addEventListener("DOMContentLoaded", iniciar);

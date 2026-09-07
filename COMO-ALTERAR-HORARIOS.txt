@@ -1,0 +1,47 @@
+HORÁRIOS DO CARDÁPIO BURGUERASCO
+
+Abra src/app.js no Visual Studio Code. No começo do arquivo, dentro de
+CONFIG, altere o bloco funcionamento:
+
+  funcionamento: {
+    fusoHorario: "America/Bahia",
+    dias: [1, 2, 3, 4, 5, 6],
+    abertura: "19:00",
+    fechamento: "23:00",
+  },
+
+NÚMEROS DOS DIAS
+0 = domingo
+1 = segunda
+2 = terça
+3 = quarta
+4 = quinta
+5 = sexta
+6 = sábado
+
+EXEMPLOS
+Segunda a sábado: dias: [1, 2, 3, 4, 5, 6]
+Terça a domingo: dias: [0, 2, 3, 4, 5, 6]
+Sexta e sábado: dias: [5, 6]
+Todos os dias: dias: [0, 1, 2, 3, 4, 5, 6]
+
+Use horas e minutos com dois dígitos, entre aspas: "18:30", "19:00", "23:30".
+O mesmo intervalo vale para todos os dias escolhidos. A abertura está incluída;
+no horário exato de fechamento, o aviso volta a aparecer.
+
+Se o fechamento for depois da meia-noite, use, por exemplo, "01:00".
+Nesse caso, a madrugada faz parte do atendimento iniciado no dia anterior.
+Exemplo: sábado das 19h à 1h permanece aberto até a 1h do domingo.
+Não use horários iguais para abertura e fechamento.
+
+COMO FUNCIONA
+O aviso aparece abaixo do vídeo e do endereço quando a loja está fechada.
+O texto dos dias e horários é gerado pelo código; não é preciso editar o HTML.
+O cardápio e o envio de pedidos pelo WhatsApp continuam disponíveis para encomendas.
+O horário usado é o da Bahia, mesmo que o cliente esteja em outro fuso horário.
+A página confere o horário a cada minuto e quando o cliente volta para a aba.
+O relógio do aparelho do cliente precisa estar correto.
+
+Depois de salvar as alterações, atualize os arquivos na sua hospedagem.
+Para instalar esta atualização, substitua index.html, src/app.js e src/style.css
+pelas versões deste pacote, mantendo a estrutura das pastas.
