@@ -362,7 +362,8 @@ button { cursor: pointer; }
   outline: none;
   color: var(--grafite-forte);
   background: var(--papel);
-  font-size: 0.85rem;
+  /* Campos com pelo menos 16px evitam o zoom automático ao focar no iPhone. */
+  font-size: max(16px, 1rem);
 }
 .observacao-item:focus, input:focus, textarea:focus { border-color: var(--laranja-forte); }
 
@@ -499,7 +500,7 @@ button { cursor: pointer; }
   outline: none;
   color: var(--grafite-forte);
   background: var(--branco);
-  font-size: 0.86rem;
+  font-size: max(16px, 1rem);
   text-transform: none;
 }
 .formulario textarea { resize: vertical; }
@@ -514,7 +515,7 @@ button { cursor: pointer; }
 }
 .pix[hidden], .pix__retorno[hidden] { display: none; }
 .pix label { font-size: 0.875rem; }
-.pix input { font-size: 1rem; letter-spacing: 0.04em; }
+.pix input { font-size: max(16px, 1rem); letter-spacing: 0.04em; }
 .pix__copiar {
   min-height: 44px;
   padding: 10px 12px;
