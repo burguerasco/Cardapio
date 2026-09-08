@@ -43,7 +43,7 @@ const PRODUTOS = [
     id: 3,
     categoria: "burguers",
     nome: "Rústico",
-    descricao: "Pão brioche, 1 blend de 160g na brasa, bacon fatiado, 2 fatias de queijo cheddar e molho da casa.",
+    descricao: "Pão brioche, 1 blend de 160g na brasa, bacon fatiado, 2 fatias de queijo cheddar, picles, molho barbecue e molho da casa.",
     preco: 28,
     imagem: "src/images/rustico.webp",
   },
