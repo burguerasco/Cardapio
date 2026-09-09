@@ -67,8 +67,7 @@ const PRODUTOS = [
 
 const CATEGORIAS = [
   { id: "burguers", nome: "Burguers", subtitulo: "Preparados na brasa" },
-  { id: "latas", nome: "Latas", subtitulo: "Bebidas geladas" },
-  { id: "litro", nome: "1 litro", subtitulo: "Para compartilhar" },
+  { id: "bebidas", nome: "🥤 Bebidas", subtitulo: "Latas e garrafas geladas" },
 ];
 
 const CHAVE_CARRINHO = "burguerasco:carrinho:v1";
@@ -358,7 +357,11 @@ function renderizarCategorias() {
 
 function renderizarProdutos() {
   const animarEntrada = categoriaRenderizada !== estado.categoria;
-  const produtos = PRODUTOS.filter((produto) => produto.categoria === estado.categoria);
+  const produtos = PRODUTOS.filter((produto) =>
+    estado.categoria === "bebidas"
+      ? produto.categoria === "latas" || produto.categoria === "litro"
+      : produto.categoria === estado.categoria
+  );
   const container = document.querySelector("#listaProdutos");
 
   const cards = produtos.map((produto, indice) => {
@@ -447,6 +450,24 @@ function sincronizarObservacoes(id, valor, origem) {
   });
 }
 
+function carrinhoTemBebida() {
+  return itensDoCarrinho().some((item) => item.categoria === "latas" || item.categoria === "litro");
+}
+
+function irParaBebidas() {
+  estado.categoria = "bebidas";
+  salvarCarrinho();
+  renderizarTudo();
+
+  const modal = document.querySelector("#modalCarrinho");
+  if (modal && !modal.hidden) fecharCarrinho();
+
+  requestAnimationFrame(() => {
+    const categorias = document.querySelector("#categorias");
+    if (categorias) categorias.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+
 function montarPainel(destino) {
   const template = document.querySelector("#templatePainel");
   destino.replaceChildren(template.content.cloneNode(true));
@@ -459,6 +480,14 @@ function montarPainel(destino) {
   const avisoCarrinho = destino.querySelector("[data-aviso-carrinho]");
   avisoCarrinho.hidden = !estado.avisoCarrinho;
   avisoCarrinho.textContent = estado.avisoCarrinho;
+
+  const sugestaoBebida = destino.querySelector("[data-sugestao-bebida]");
+  const mostrarSugestaoBebida = itens.length > 0 && !carrinhoTemBebida();
+  sugestaoBebida.hidden = !mostrarSugestaoBebida;
+  if (mostrarSugestaoBebida) {
+    sugestaoBebida.querySelector("[data-escolher-bebida]").addEventListener("click", irParaBebidas);
+  }
+
   const botaoLimpar = destino.querySelector("[data-limpar-carrinho]");
   botaoLimpar.hidden = !itens.length;
   botaoLimpar.addEventListener("click", limparCarrinho);

@@ -463,6 +463,50 @@ button { cursor: pointer; }
 .pedido__total strong { color: var(--grafite-forte); font: 700 1.7rem "Barlow Condensed", sans-serif; }
 .pedido__taxa { margin: 5px 0 17px; color: var(--marrom); text-align: right; font-size: 0.72rem; }
 
+.sugestao-bebida {
+  margin: 12px 0 16px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid rgba(230, 160, 111, 0.75);
+  border-radius: 9px;
+  background: rgba(230, 160, 111, 0.11);
+}
+.sugestao-bebida[hidden] { display: none; }
+.sugestao-bebida__texto {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.sugestao-bebida__texto > span { flex-shrink: 0; font-size: 1.35rem; }
+.sugestao-bebida__texto strong {
+  display: block;
+  color: var(--grafite-forte);
+  font-size: 0.84rem;
+}
+.sugestao-bebida__texto small {
+  display: block;
+  margin-top: 2px;
+  color: var(--marrom);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+.sugestao-bebida button {
+  flex: 0 0 auto;
+  padding: 9px 11px;
+  border: 0;
+  border-radius: 7px;
+  color: var(--grafite-forte);
+  background: var(--laranja);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+.sugestao-bebida button:hover { background: #dc915f; }
+.sugestao-bebida button:focus-visible { outline: 2px solid var(--grafite-forte); outline-offset: 3px; }
+
 .grupo-botoes, .pagamentos { display: grid; gap: 7px; }
 .grupo-botoes { grid-template-columns: 1fr 1fr; }
 .pagamentos { grid-template-columns: repeat(3, 1fr); }
@@ -691,6 +735,8 @@ button { cursor: pointer; }
   .produto__descricao { margin: 14px 0; font-size: 0.94rem; }
   .aviso-novidades { min-height: 100px; padding: 20px; }
   .aviso-novidades p { font-size: 1.3rem; }
+  .sugestao-bebida { align-items: stretch; flex-direction: column; }
+  .sugestao-bebida button { width: 100%; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -717,6 +763,7 @@ button { cursor: pointer; }
   @media (hover: hover) and (pointer: fine) {
     .adicionar:enabled:hover,
     .pix__copiar:enabled:hover,
+    .sugestao-bebida button:enabled:hover,
     .finalizar:enabled:hover,
     .barra-pedido:enabled:hover { transform: translateY(-2px); }
 
@@ -731,6 +778,7 @@ button { cursor: pointer; }
   .pagamentos button:enabled:active,
   .pix__copiar:enabled:active,
   .limpar-carrinho:enabled:active,
+  .sugestao-bebida button:enabled:active,
   .finalizar:enabled:active,
   .barra-pedido:enabled:active,
   .modal__fechar:enabled:active { transform: scale(0.97); }
