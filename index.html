@@ -1,180 +1,42 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f4eee8" />
-    <meta
-      name="description"
-      content="Cardápio digital da Burguerasco — hambúrgueres preparados na brasa."
-    />
-    <title>Burguerasco | Cardápio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="src/style.css" />
-    <link rel="stylesheet" href="src/hero-video.css" />
-    <script src="src/app.js" defer></script>
-  </head>
-  <body>
-    <header class="topo topo--video">
-      <video class="topo__video" autoplay muted loop playsinline preload="metadata">
-        <source src="hero-video.mp4" type="video/mp4" />
-      </video>
-      <div class="topo__overlay"></div>
-      <img class="topo__logo" src="logo-burguerasco.png" alt="Burguerasco" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BURGUERASCO — Encerramos por hoje</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <div class="grain"></div>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Burguerasco início"><img src="assets/logo.png" alt="Burguerasco" /></a>
+      <div class="status" id="status"><i></i> <span>fechado no momento</span></div>
     </header>
 
-    <div class="endereco-loja">
-      <span>⌖</span> Rua Isabel Fernandes, s/n, Guarujá, Macarani - BA
-    </div>
-
-    <div class="aviso-funcionamento" id="avisoFuncionamento" role="status" aria-live="polite" aria-atomic="true" hidden>
-      <span class="aviso-funcionamento__icone" aria-hidden="true">🕒</span>
-      <div>
-        <strong class="aviso-funcionamento__titulo">Estamos fechados no momento.</strong>
-        <p data-horario-funcionamento></p>
-        <p class="aviso-funcionamento__encomenda">Mas você já pode encomendar seu pedido!</p>
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow" id="eyebrow">hambúrguer artesanal na brasa</p>
+        <h1 id="headline">Encerramos<br><em>por hoje</em></h1>
+        <p class="lead" id="lead">A vontade de comer um BURGUERASCO não precisa esperar muito. Estamos fechados agora e voltamos em breve, com aquele sabor  que você já conhece.</p>
+        <div class="open-note"><span class="pulse"></span><div><b>Voltamos em breve</b><small>Acompanhe nossas redes para saber quando abriremos.</small></div></div><a class="order-button" id="orderButton" href="https://burguerasco.github.io/Cardapio/" >Pedir agora <span>↗</span></a>
       </div>
-    </div>
-
-    <main class="layout">
-      <section class="cardapio" aria-labelledby="tituloProdutos">
-        <div class="categorias" id="categorias" aria-label="Categorias do cardápio"></div>
-
-        <div class="secao-titulo">
-          <div>
-            <span>ESCOLHA SEU PEDIDO</span>
-            <h2 id="tituloProdutos">Burguers</h2>
-          </div>
-          <p id="subtituloProdutos">Preparados na brasa</p>
+      <div class="slider-wrap" aria-label="Fotos dos hambúrgueres">
+        <div class="slider" id="slider">
+          <article class="slide active"><img src="assets/fitburguer.jpg" alt="Fit Burguer" /><div class="caption"><span>01 / 04</span><h2>Leve na ideia.<br><b>Gigante no sabor.</b></h2></div></article>
+          <article class="slide"><img src="assets/xburguer.jpg" alt="X-Burguer" /><div class="caption"><span>02 / 04</span><h2>O clássico que<br><b>nunca falha.</b></h2></div></article>
+          <article class="slide"><img src="assets/rustico.jpg" alt="Rústico" /><div class="caption"><span>03 / 04</span><h2>Feito na brasa.<br><b>Do jeito certo.</b></h2></div></article>
+          <article class="slide"><img src="assets/burguerasco.jpg" alt="Burguerasco" /><div class="caption"><span>04 / 04</span><h2>Fumaça, queijo e<br><b>muita personalidade.</b></h2></div></article>
         </div>
-
-        <div class="produtos" id="listaProdutos"></div>
-      </section>
-
-      <aside class="pedido pedido--desktop" id="painelDesktop" aria-label="Resumo do pedido"></aside>
-    </main>
-
-    <button class="barra-pedido" id="barraPedido" type="button" hidden>
-      <span>Ver pedido <b id="quantidadeBarra">0</b></span>
-      <strong id="totalBarra">R$ 0,00</strong>
-    </button>
-
-    <div class="modal" id="modalCarrinho" hidden>
-      <button class="modal__fundo" id="fecharPeloFundo" aria-label="Fechar pedido" type="button"></button>
-      <section class="modal__conteudo" role="dialog" aria-modal="true" aria-label="Seu pedido">
-        <button class="modal__fechar" id="fecharCarrinho" type="button" aria-label="Fechar">×</button>
-        <div class="pedido pedido--mobile" id="painelMobile"></div>
-      </section>
-    </div>
-
-    <template id="templatePainel">
-      <div class="pedido__cabecalho">
-        <div>
-          <span>SEU PEDIDO</span>
-          <h2 data-resumo-titulo>Carrinho vazio</h2>
-        </div>
+        <div class="controls"><button id="prev" aria-label="Foto anterior">←</button><div class="dots" id="dots"></div><button id="next" aria-label="Próxima foto">→</button></div>
       </div>
+    </section>
 
-      <p class="pedido__aviso" data-aviso-carrinho role="status" hidden></p>
-      <div class="pedido__itens" data-itens></div>
-      <button class="limpar-carrinho" data-limpar-carrinho type="button" hidden>Limpar carrinho</button>
-
-      <div class="pedido__vazio" data-vazio>
-        <p>Adicione um item<br />para começar.</p>
-      </div>
-
-      <div class="pedido__valores">
-        <div>
-          <span>Subtotal</span>
-          <strong data-subtotal>R$ 0,00</strong>
-        </div>
-        <div>
-          <span>Taxa de entrega</span>
-          <strong data-taxa-entrega>R$ 3,00</strong>
-        </div>
-      </div>
-      <div class="pedido__total">
-        <span>Total</span>
-        <strong data-total>R$ 0,00</strong>
-      </div>
-      <p class="pedido__taxa" data-aviso-taxa>Taxa fixa de entrega: R$ 3,00.</p>
-
-      <div class="sugestao-bebida" data-sugestao-bebida hidden>
-        <div class="sugestao-bebida__texto">
-          <span aria-hidden="true">🥤</span>
-          <div>
-            <strong>Que tal uma bebida?</strong>
-            <small>Seu pedido ainda está sem bebida.</small>
-          </div>
-        </div>
-        <button type="button" data-escolher-bebida>Escolher bebida</button>
-      </div>
-
-      <div class="grupo-botoes" data-tipo-entrega>
-        <button class="ativo" type="button" data-valor="entrega">Entrega</button>
-        <button type="button" data-valor="retirada">Retirada</button>
-      </div>
-
-      <div class="formulario">
-        <label>
-          Nome
-          <input type="text" data-campo="nome" placeholder="Como podemos chamar você?" autocomplete="name" />
-        </label>
-        <label>
-          WhatsApp
-          <input type="tel" data-campo="telefone" placeholder="(77) 99999-9999" autocomplete="tel" />
-        </label>
-        <label data-endereco-wrap>
-          Endereço de entrega
-          <input type="text" data-campo="endereco" placeholder="Rua, número e bairro" autocomplete="street-address" />
-        </label>
-
-        <fieldset>
-          <legend>Forma de pagamento</legend>
-          <div class="pagamentos" data-pagamentos>
-            <button type="button" data-valor="pix">Pix</button>
-            <button type="button" data-valor="cartao">Cartão</button>
-            <button type="button" data-valor="dinheiro">Dinheiro</button>
-          </div>
-        </fieldset>
-
-        <p class="pedido__aviso" data-aviso-cartao role="status" hidden>
-          Aceitamos pagamento por cartão <strong>somente por aproximação.</strong>
-        </p>
-
-        <div class="pix" data-pix hidden>
-          <label>
-            Chave Pix
-            <input type="text" data-chave-pix readonly aria-label="Chave Pix" inputmode="none" spellcheck="false" />
-          </label>
-          <button class="pix__copiar" type="button" data-copiar-pix>Copiar chave Pix</button>
-          <div class="pix__retorno" data-pix-retorno role="status" aria-live="polite" hidden>
-            <strong data-pix-status></strong>
-            <p>Não esqueça de enviar o comprovante de pagamento pelo WhatsApp.</p>
-          </div>
-        </div>
-
-        <label data-troco-wrap hidden>
-          Troco para
-          <input type="text" inputmode="decimal" data-campo="troco" placeholder="Ex.: R$ 50,00" />
-        </label>
-
-        <label>
-          Observações gerais
-          <textarea data-campo="observacao" rows="3" placeholder="Ponto de referência ou outro recado"></textarea>
-        </label>
-      </div>
-
-      <p class="mensagem-validacao" data-validacao aria-live="polite"></p>
-      <button class="finalizar" data-finalizar type="button">
-        <span aria-hidden="true">🚀</span>
-        <span>Enviar pedido no WhatsApp</span>
-      </button>
-    </template>
-  </body>
+    <footer><span>Macarani — Bahia</span><span class="footer-line"></span><span></span></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
 </html>
