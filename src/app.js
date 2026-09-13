@@ -13,7 +13,7 @@ const CONFIG = {
   // O texto do aviso acompanha estas configurações automaticamente.
   funcionamento: {
     fusoHorario: "America/Bahia",
-    dias: [1, 2, 3, 4, 5, 6], // Segunda a sábado; domingo fechado.
+    dias: [0, 1, 2, 3, 4, 5, 6], // Segunda a sábado; domingo fechado.
     abertura: "19:00",
     fechamento: "23:00", // Pode ser após a meia-noite, como "01:00".
   },
