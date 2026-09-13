@@ -3,7 +3,9 @@ const CONFIG = {
   whatsapp: "5577988047525",
   chavePix: "77988047525",
   endereco: "Rua Isabel Fernandes, s/n, Guarujá, Macarani - BA",
-  taxaEntrega: 3,
+  // ===== FRETE: ALTERE AQUI =====
+  freteGratis: true, // true = frete grátis; false = cobrar a taxa abaixo.
+  taxaEntrega: 3, // Valor em reais quando o frete grátis estiver desativado.
   // ===== DIAS E HORÁRIOS: ALTERE SOMENTE ESTE BLOCO =====
   // 0 = domingo, 1 = segunda, 2 = terça, 3 = quarta,
   // 4 = quinta, 5 = sexta, 6 = sábado.
@@ -292,7 +294,13 @@ function subtotal() {
 }
 
 function taxaEntrega() {
-  return estado.entrega === "entrega" && quantidadeTotal() > 0 ? CONFIG.taxaEntrega : 0;
+  return estado.entrega === "entrega" && quantidadeTotal() > 0 && !CONFIG.freteGratis ? CONFIG.taxaEntrega : 0;
+}
+
+function textoTaxaEntrega() {
+  return estado.entrega === "entrega" && (CONFIG.freteGratis || CONFIG.taxaEntrega === 0)
+    ? "Grátis"
+    : moeda(taxaEntrega());
 }
 
 function totalPedido() {
@@ -492,10 +500,12 @@ function montarPainel(destino) {
   botaoLimpar.hidden = !itens.length;
   botaoLimpar.addEventListener("click", limparCarrinho);
   destino.querySelector("[data-subtotal]").textContent = moeda(subtotal());
-  destino.querySelector("[data-taxa-entrega]").textContent = moeda(taxaEntrega());
+  destino.querySelector("[data-taxa-entrega]").textContent = textoTaxaEntrega();
   destino.querySelector("[data-total]").textContent = moeda(totalPedido());
   destino.querySelector("[data-aviso-taxa]").textContent = estado.entrega === "entrega"
-    ? `Taxa fixa de entrega: ${moeda(CONFIG.taxaEntrega)}.`
+    ? (CONFIG.freteGratis || CONFIG.taxaEntrega === 0
+      ? "🚚 Frete grátis para seu pedido!"
+      : `Taxa fixa de entrega: ${moeda(CONFIG.taxaEntrega)}.`)
     : "Retirada no local: sem taxa de entrega.";
 
   const lista = destino.querySelector("[data-itens]");
@@ -665,7 +675,7 @@ function enviarPedido(destino) {
     ...linhasProdutos,
     "",
     `*Subtotal:* ${moeda(subtotal())}`,
-    `*Taxa de entrega:* ${moeda(taxaEntrega())}`,
+    `*Taxa de entrega:* ${textoTaxaEntrega()}`,
     `*Total:* ${moeda(totalPedido())}`,
     "",
     `*Cliente:* ${estado.campos.nome.trim()}`,

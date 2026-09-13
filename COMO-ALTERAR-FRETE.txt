@@ -1,0 +1,16 @@
+COMO ALTERAR O FRETE
+
+Abra src/app.js. No início, dentro de CONFIG:
+
+  freteGratis: true,
+  taxaEntrega: 3,
+
+true ativa frete grátis para todos os pedidos de entrega, sem valor mínimo.
+false desativa o frete grátis e cobra taxaEntrega (em reais).
+Exemplo: taxaEntrega: 5, cobra R$ 5,00 quando freteGratis for false.
+Use ponto para centavos: taxaEntrega: 3.50,
+
+O arquivo já está com frete grátis ATIVADO.
+O total, o aviso do carrinho e a mensagem do WhatsApp acompanham a configuração.
+Retirada continua sem taxa.
+Após editar, salve e publique o arquivo src/app.js atualizado no seu site.
