@@ -4,7 +4,7 @@ const CONFIG = {
   chavePix: "77988047525",
   endereco: "Rua Isabel Fernandes, s/n, Guarujá, Macarani - BA",
   // ===== FRETE: ALTERE AQUI =====
-  freteGratis: true, // true = frete grátis; false = cobrar a taxa abaixo.
+  freteGratis: false, // true = frete grátis; false = cobrar a taxa abaixo.
   taxaEntrega: 3, // Valor em reais quando o frete grátis estiver desativado.
   // ===== DIAS E HORÁRIOS: ALTERE SOMENTE ESTE BLOCO =====
   // 0 = domingo, 1 = segunda, 2 = terça, 3 = quarta,
@@ -13,7 +13,7 @@ const CONFIG = {
   // O texto do aviso acompanha estas configurações automaticamente.
   funcionamento: {
     fusoHorario: "America/Bahia",
-    dias: [0, 1, 2, 3, 4, 5, 6], // Segunda a sábado; domingo fechado.
+    dias: [0, , , 3, 4, 5, 6], // Segunda a sábado; domingo fechado.
     abertura: "19:00",
     fechamento: "23:00", // Pode ser após a meia-noite, como "01:00".
   },
