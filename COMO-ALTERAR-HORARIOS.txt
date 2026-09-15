@@ -5,7 +5,7 @@ CONFIG, altere o bloco funcionamento:
 
   funcionamento: {
     fusoHorario: "America/Bahia",
-    dias: [1, 2, 3, 4, 5, 6],
+    dias: [3, 4, 5, 6, 0],
     abertura: "19:00",
     fechamento: "23:00",
   },

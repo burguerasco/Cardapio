@@ -13,7 +13,7 @@ const CONFIG = {
   // O texto do aviso acompanha estas configurações automaticamente.
   funcionamento: {
     fusoHorario: "America/Bahia",
-    dias: [0, , , 3, 4, 5, 6], // Segunda a sábado; domingo fechado.
+    dias: [3, 4, 5, 6, 0], // Quarta a domingo; segunda e terça fechado.
     abertura: "19:00",
     fechamento: "23:00", // Pode ser após a meia-noite, como "01:00".
   },
@@ -141,11 +141,14 @@ function textoHorarioFuncionamento() {
 
   const nomesDias = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
   const diasRecorrentes = ["aos domingos", "às segundas", "às terças", "às quartas", "às quintas", "às sextas", "aos sábados"];
+  const inicioSequencia = dias.find((dia) => !dias.includes((dia + 6) % 7));
+  const diasEmSequencia = inicioSequencia === undefined ? dias :
+    Array.from({ length: dias.length }, (_, indice) => (inicioSequencia + indice) % 7);
   let textoDias;
   if (dias.length === 7) {
     textoDias = "todos os dias";
-  } else if (dias.length > 1 && dias.every((dia, indice) => dia === dias[0] + indice)) {
-    textoDias = `de ${nomesDias[dias[0]]} a ${nomesDias[dias[dias.length - 1]]}`;
+  } else if (dias.length > 1 && diasEmSequencia.every((dia) => dias.includes(dia))) {
+    textoDias = `de ${nomesDias[diasEmSequencia[0]]} a ${nomesDias[diasEmSequencia[diasEmSequencia.length - 1]]}`;
   } else {
     const nomes = dias.map((dia) => diasRecorrentes[dia]);
     textoDias = nomes.length === 1 ? nomes[0] : `${nomes.slice(0, -1).join(", ")} e ${nomes[nomes.length - 1]}`;
