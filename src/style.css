@@ -290,18 +290,6 @@ button { cursor: pointer; }
   font: 700 clamp(1.55rem, 3vw, 2rem) "Barlow Condensed", sans-serif;
   text-transform: uppercase;
 }
-.produto__precos {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-  white-space: nowrap;
-}
-.produto__preco-anterior {
-  color: var(--grafite);
-  font-size: 0.9rem;
-  text-decoration: line-through;
-}
 .produto__preco {
   color: var(--laranja-forte);
   font: 700 1.55rem "Barlow Condensed", sans-serif;
