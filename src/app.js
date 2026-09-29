@@ -13,7 +13,7 @@ const CONFIG = {
   // O texto do aviso acompanha estas configurações automaticamente.
   funcionamento: {
     fusoHorario: "America/Bahia",
-    dias: [3, 4, 5, 6, 0], // Quarta a domingo; segunda e terça fechado.
+    dias: [1, 2, 3, 4, 5, 6, 0], // Quarta a domingo; segunda e terça fechado.
     abertura: "19:00",
     fechamento: "23:00", // Pode ser após a meia-noite, como "01:00".
   },
@@ -31,7 +31,7 @@ const PRODUTOS = [
     nome: "Cheese Salada",
     descricao: "Pão brioche, 1 blend de 160g na brasa, 2 fatias de queijo cheddar, alface, tomate e molho da casa.",
     preco: 18,
-    imagem: "src/images/cheese-salada.webp",
+    imagem: "src/images/cheese-salada.jpg",
   },
   {
     id: 2,
@@ -57,11 +57,13 @@ const PRODUTOS = [
     preco: 36,
     imagem: "src/images/burguerasco.webp",
   },
-  { id: 5, categoria: "latas", nome: "Coca-Cola lata", descricao: "350 ml • bem gelada", preco: 5, imagem: "src/images/coca-cola-lata.webp" },
-  { id: 6, categoria: "latas", nome: "Coca-Cola Zero lata", descricao: "350 ml • sem açúcar", preco: 5, imagem: "src/images/coca-cola-zero-lata.webp" },
+  { id: 5, categoria: "latas", nome: "Coca-Cola lata", descricao: "350 ml • bem gelada", preco: 6, imagem: "src/images/coca-cola-lata.webp" },
+  { id: 6, categoria: "latas", nome: "Coca-Cola Zero lata", descricao: "350 ml • sem açúcar", preco: 6, imagem: "src/images/coca-cola-zero-lata.webp" },
   // Foto do Kuat Zero: https://www.gbarbosa.com.br/refrigerante-guarana-kuat-zero-lata-350ml/p
-  { id: 11, categoria: "latas", nome: "Guaraná Kuat Zero lata", descricao: "350 ml • sem açúcar", preco: 5, imagem: "src/images/guarana-kuat-zero-lata.webp" },
-  { id: 7, categoria: "latas", nome: "Guaraná Antarctica lata", descricao: "350 ml • bem gelado", preco: 5, imagem: "src/images/guarana-lata.webp", disponivel: false },
+  { id: 11, categoria: "latas", nome: "Guaraná Kuat Zero lata", descricao: "350 ml • sem açúcar", preco: 6, imagem: "src/images/guarana-kuat-zero-lata.webp" },
+  { id: 7, categoria: "latas", nome: "Guaraná Antarctica lata", descricao: "350 ml • bem gelado", preco: 6, imagem: "src/images/guarana-lata.webp", disponivel: false },
+  { id: 12, categoria: "latas", nome: "Suco Del Valle Pêssego", descricao: "Lata de 290 ml", preco: 6, imagem: "src/images/del-valle-pessego.png" },
+  { id: 13, categoria: "latas", nome: "Suco Del Valle Uva", descricao: "Lata de 290 ml", preco: 6, imagem: "src/images/del-valle-uva.png" },
   { id: 8, categoria: "litro", nome: "Coca-Cola 1 litro", descricao: "Garrafa de 1 litro", preco: 8, imagem: "src/images/coca-cola-1l.webp" },
   { id: 9, categoria: "litro", nome: "Coca-Cola Zero 1 litro", descricao: "Garrafa de 1 litro • sem açúcar", preco: 8, imagem: "src/images/coca-cola-zero-1l.webp" },
   { id: 10, categoria: "litro", nome: "Guaraná Antarctica 1 litro", descricao: "Garrafa de 1 litro", preco: 8, imagem: "src/images/guarana-1l.webp" },
