@@ -13,7 +13,7 @@ const CONFIG = {
   // O texto do aviso acompanha estas configurações automaticamente.
   funcionamento: {
     fusoHorario: "America/Bahia",
-    dias: [1, 2, 3, 4, 5, 6, 0], // Quarta a domingo; segunda e terça fechado.
+    dias: [3, 4, 5, 6, 0], // Quarta a domingo; segunda e terça fechado.
     abertura: "19:00",
     fechamento: "23:00", // Pode ser após a meia-noite, como "01:00".
   },
@@ -26,36 +26,52 @@ const CONFIG = {
 // Para deixar um produto indisponível, adicione disponivel: false.
 const PRODUTOS = [
   {
-    id: 1,
-    categoria: "burguers",
-    nome: "Cheese Salada",
-    descricao: "Pão brioche, 1 blend de 160g na brasa, 2 fatias de queijo cheddar, alface, tomate e molho da casa.",
-    preco: 18,
-    imagem: "src/images/cheese-salada.jpg",
+    "id": 1,
+    "categoria": "burguers",
+    "nome": "Cheese Salada",
+    "descricao": "Pão brioche, 1 blend de 160g, 1 fatia de queijo prato, alface, tomate e molho da casa.",
+    "preco": 22,
+    "imagem": "src/images/cheese-salada.jpg"
   },
   {
-    id: 2,
-    categoria: "burguers",
-    nome: "Cheese Burguer",
-    descricao: "Pão brioche, 1 blend de 160g na brasa, 2 fatias de queijo cheddar e molho da casa.",
-    preco: 18,
-    imagem: "src/images/cheese-burguer.webp",
+    "id": 2,
+    "categoria": "burguers",
+    "nome": "Cheese Burguer",
+    "descricao": "Pão brioche, 1 blend de 160g, 2 fatias de queijo cheddar, barbecue e molho da casa.",
+    "preco": 22,
+    "imagem": "src/images/cheese-burguer.webp"
   },
   {
-    id: 3,
-    categoria: "burguers",
-    nome: "Rústico",
-    descricao: "Pão brioche, 1 blend de 160g na brasa, bacon fatiado, 2 fatias de queijo cheddar, picles, molho barbecue e molho da casa.",
-    preco: 25,
-    imagem: "src/images/rustico.webp",
+    "id": 14,
+    "categoria": "burguers",
+    "nome": "Bacon salada",
+    "descricao": "Pão brioche, blend de 160g, bacon fatiado, 1 fatia de queijo prato, salada, cebola e maionese verde da casa.",
+    "preco": 25,
+    "imagem": "src/images/bacon-salada.webp"
   },
   {
-    id: 4,
-    categoria: "burguers",
-    nome: "Burguerasco",
-    descricao: "Pão brioche, 2 blends de 160g na brasa, bacon fatiado, 2 fatias de queijo cheddar e molho da casa.",
-    preco: 36,
-    imagem: "src/images/burguerasco.webp",
+    "id": 3,
+    "categoria": "burguers",
+    "nome": "Rústico",
+    "descricao": "Pão brioche, blend de 160g, bacon fatiado, 2 fatias de queijo cheddar, picles, barbecue e molho da casa.",
+    "preco": 28,
+    "imagem": "src/images/rustico.webp"
+  },
+  {
+    "id": 15,
+    "categoria": "burguers",
+    "nome": "Duplo burguer salada",
+    "descricao": "Pão brioche, 2 blends de 160g, 1 fatia de queijo prato, 1 fatia de queijo cheddar, alface, tomate e molho da casa.",
+    "preco": 28,
+    "imagem": "src/images/duplo-burguer-salada.webp"
+  },
+  {
+    "id": 4,
+    "categoria": "burguers",
+    "nome": "Burguerasco",
+    "descricao": "Pão brioche, 2 blends de 160g, bacon fatiado, 2 fatias de queijo cheddar, barbecue e molho da casa.",
+    "preco": 36,
+    "imagem": "src/images/burguerasco.webp"
   },
   { id: 5, categoria: "latas", nome: "Coca-Cola lata", descricao: "350 ml • bem gelada", preco: 6, imagem: "src/images/coca-cola-lata.webp" },
   { id: 6, categoria: "latas", nome: "Coca-Cola Zero lata", descricao: "350 ml • sem açúcar", preco: 6, imagem: "src/images/coca-cola-zero-lata.webp" },

@@ -1,0 +1,7 @@
+FOTOS PROVISÓRIAS DOS NOVOS BURGUERS
+
+Bacon salada: src/images/bacon-salada.webp (cópia provisória da foto do Rústico).
+Duplo burguer salada: src/images/duplo-burguer-salada.webp (cópia provisória da foto do Burguerasco).
+
+Para trocar, substitua esses arquivos pelas fotos definitivas usando os mesmos nomes e o formato WebP.
+Se usar JPG ou PNG, altere também o caminho no campo imagem do produto em src/app.js.
