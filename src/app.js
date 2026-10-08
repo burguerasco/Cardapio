@@ -62,7 +62,7 @@ const PRODUTOS = [
     "categoria": "burguers",
     "nome": "Duplo burguer salada",
     "descricao": "Pão brioche, 2 blends de 160g, 1 fatia de queijo prato, 1 fatia de queijo cheddar, alface, tomate e molho da casa.",
-    "preco": 28,
+    "preco": 33,
     "imagem": "src/images/duplo-burguer-salada.webp"
   },
   {
