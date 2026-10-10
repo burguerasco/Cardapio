@@ -4,7 +4,7 @@ const CONFIG = {
   chavePix: "77988047525",
   endereco: "Rua Isabel Fernandes, s/n, Guarujá, Macarani - BA",
   // ===== FRETE: ALTERE AQUI =====
-  freteGratis: false, // true = frete grátis; false = cobrar a taxa abaixo.
+  freteGratis: true, // true = frete grátis; false = cobrar a taxa abaixo.
   taxaEntrega: 3, // Valor em reais quando o frete grátis estiver desativado.
   // ===== DIAS E HORÁRIOS: ALTERE SOMENTE ESTE BLOCO =====
   // 0 = domingo, 1 = segunda, 2 = terça, 3 = quarta,
@@ -30,7 +30,7 @@ const PRODUTOS = [
     "categoria": "burguers",
     "nome": "Cheese Salada",
     "descricao": "Pão brioche, 1 blend de 120g, 1 fatia de queijo prato, alface, tomate e molho da casa.",
-    "preco": 22,
+    "preco": 18,
     "imagem": "src/images/cheese-salada.jpg"
   },
   {
@@ -38,7 +38,7 @@ const PRODUTOS = [
     "categoria": "burguers",
     "nome": "Cheese Burguer",
     "descricao": "Pão brioche, 1 blend de 120g, 2 fatias de queijo cheddar, barbecue e molho da casa.",
-    "preco": 22,
+    "preco": 18,
     "imagem": "src/images/cheese-burguer.webp"
   },
   {
@@ -46,7 +46,7 @@ const PRODUTOS = [
     "categoria": "burguers",
     "nome": "Bacon salada",
     "descricao": "Pão brioche, blend de 120g, bacon fatiado, 1 fatia de queijo prato, salada, cebola e maionese verde da casa.",
-    "preco": 25,
+    "preco": 22,
     "imagem": "src/images/bacon-salada.webp"
   },
   {
@@ -54,7 +54,7 @@ const PRODUTOS = [
     "categoria": "burguers",
     "nome": "Rústico",
     "descricao": "Pão brioche, blend de 120g, bacon fatiado, 2 fatias de queijo cheddar, picles, barbecue e molho da casa.",
-    "preco": 28,
+    "preco": 25,
     "imagem": "src/images/rustico.webp"
   },
   {
@@ -62,7 +62,7 @@ const PRODUTOS = [
     "categoria": "burguers",
     "nome": "Duplo burguer salada",
     "descricao": "Pão brioche, 2 blends de 120g, 1 fatia de queijo prato, 1 fatia de queijo cheddar, alface, tomate e molho da casa.",
-    "preco": 33,
+    "preco": 30,
     "imagem": "src/images/duplo-burguer-salada.webp"
   },
   {
@@ -70,7 +70,7 @@ const PRODUTOS = [
     "categoria": "burguers",
     "nome": "Burguerasco",
     "descricao": "Pão brioche, 2 blends de 120g, bacon fatiado, 2 fatias de queijo cheddar, barbecue e molho da casa.",
-    "preco": 36,
+    "preco": 35,
     "imagem": "src/images/burguerasco.webp"
   },
   { id: 5, categoria: "latas", nome: "Coca-Cola lata", descricao: "350 ml • bem gelada", preco: 6, imagem: "src/images/coca-cola-lata.webp" },
