@@ -78,8 +78,6 @@ const PRODUTOS = [
   // Foto do Kuat Zero: https://www.gbarbosa.com.br/refrigerante-guarana-kuat-zero-lata-350ml/p
   { id: 11, categoria: "latas", nome: "Guaraná Kuat Zero lata", descricao: "350 ml • sem açúcar", preco: 6, imagem: "src/images/guarana-kuat-zero-lata.webp" },
   { id: 7, categoria: "latas", nome: "Guaraná Antarctica lata", descricao: "350 ml • bem gelado", preco: 6, imagem: "src/images/guarana-lata.webp", disponivel: false },
-  { id: 12, categoria: "latas", nome: "Suco Del Valle Pêssego", descricao: "Lata de 290 ml", preco: 6, imagem: "src/images/del-valle-pessego.png" },
-  { id: 13, categoria: "latas", nome: "Suco Del Valle Uva", descricao: "Lata de 290 ml", preco: 6, imagem: "src/images/del-valle-uva.png" },
   { id: 8, categoria: "litro", nome: "Coca-Cola 1 litro", descricao: "Garrafa de 1 litro", preco: 8, imagem: "src/images/coca-cola-1l.webp" },
   { id: 9, categoria: "litro", nome: "Coca-Cola Zero 1 litro", descricao: "Garrafa de 1 litro • sem açúcar", preco: 8, imagem: "src/images/coca-cola-zero-1l.webp" },
   { id: 10, categoria: "litro", nome: "Guaraná Antarctica 1 litro", descricao: "Garrafa de 1 litro", preco: 8, imagem: "src/images/guarana-1l.webp" },
