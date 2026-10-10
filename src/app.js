@@ -13,7 +13,7 @@ const CONFIG = {
   // O texto do aviso acompanha estas configurações automaticamente.
   funcionamento: {
     fusoHorario: "America/Bahia",
-    dias: [3, 4, 5, 6, 0], // Quarta a domingo; segunda e terça fechado.
+    dias: [4, 5, 6, 0], // Quarta a domingo; segunda e terça fechado.
     abertura: "19:00",
     fechamento: "23:00", // Pode ser após a meia-noite, como "01:00".
   },
@@ -29,7 +29,7 @@ const PRODUTOS = [
     "id": 1,
     "categoria": "burguers",
     "nome": "Cheese Salada",
-    "descricao": "Pão brioche, 1 blend de 160g, 1 fatia de queijo prato, alface, tomate e molho da casa.",
+    "descricao": "Pão brioche, 1 blend de 120g, 1 fatia de queijo prato, alface, tomate e molho da casa.",
     "preco": 22,
     "imagem": "src/images/cheese-salada.jpg"
   },
@@ -37,7 +37,7 @@ const PRODUTOS = [
     "id": 2,
     "categoria": "burguers",
     "nome": "Cheese Burguer",
-    "descricao": "Pão brioche, 1 blend de 160g, 2 fatias de queijo cheddar, barbecue e molho da casa.",
+    "descricao": "Pão brioche, 1 blend de 120g, 2 fatias de queijo cheddar, barbecue e molho da casa.",
     "preco": 22,
     "imagem": "src/images/cheese-burguer.webp"
   },
@@ -45,7 +45,7 @@ const PRODUTOS = [
     "id": 14,
     "categoria": "burguers",
     "nome": "Bacon salada",
-    "descricao": "Pão brioche, blend de 160g, bacon fatiado, 1 fatia de queijo prato, salada, cebola e maionese verde da casa.",
+    "descricao": "Pão brioche, blend de 120g, bacon fatiado, 1 fatia de queijo prato, salada, cebola e maionese verde da casa.",
     "preco": 25,
     "imagem": "src/images/bacon-salada.webp"
   },
@@ -53,7 +53,7 @@ const PRODUTOS = [
     "id": 3,
     "categoria": "burguers",
     "nome": "Rústico",
-    "descricao": "Pão brioche, blend de 160g, bacon fatiado, 2 fatias de queijo cheddar, picles, barbecue e molho da casa.",
+    "descricao": "Pão brioche, blend de 120g, bacon fatiado, 2 fatias de queijo cheddar, picles, barbecue e molho da casa.",
     "preco": 28,
     "imagem": "src/images/rustico.webp"
   },
@@ -61,7 +61,7 @@ const PRODUTOS = [
     "id": 15,
     "categoria": "burguers",
     "nome": "Duplo burguer salada",
-    "descricao": "Pão brioche, 2 blends de 160g, 1 fatia de queijo prato, 1 fatia de queijo cheddar, alface, tomate e molho da casa.",
+    "descricao": "Pão brioche, 2 blends de 120g, 1 fatia de queijo prato, 1 fatia de queijo cheddar, alface, tomate e molho da casa.",
     "preco": 33,
     "imagem": "src/images/duplo-burguer-salada.webp"
   },
@@ -69,7 +69,7 @@ const PRODUTOS = [
     "id": 4,
     "categoria": "burguers",
     "nome": "Burguerasco",
-    "descricao": "Pão brioche, 2 blends de 160g, bacon fatiado, 2 fatias de queijo cheddar, barbecue e molho da casa.",
+    "descricao": "Pão brioche, 2 blends de 120g, bacon fatiado, 2 fatias de queijo cheddar, barbecue e molho da casa.",
     "preco": 36,
     "imagem": "src/images/burguerasco.webp"
   },
